@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="mental health">
+    <meta name="author" content="pychunk">
+    <title>pychunk</title>
+    <link rel="stylesheet" href="style_mainpage.css">
+</head>
+<body>
+    <header>
+        <h1>pychunk</h1>
+    </header>
+    <nav>
+      
+    </nav>
+    <div class="carousel"><div class="container">
+        <figure class="carousel-item">
+            <a href="volutarywork.html" target="_blank"><img src="voluntary.jpeg" class="active" alt="Image 1"></a>
+            <figcaption>click here to know how Voluntary Work affects our mental strength</figcaption>
+        </figure>
+        <figure class="carousel-item">
+            <a href="yoga.html" target="_blank"><img src="yoga.jpeg" alt="Image 2"></a>
+            <figcaption>click here to know how Yoga Session affects our mental strength</figcaption>
+        </figure>
+        <figure class="carousel-item">
+            <a href="meditation.html" target="_blank"><img src="meditation.jpeg" alt="Image 3"></a>
+            <figcaption>click here to know how Meditation affects our mental strength</figcaption>
+        </figure>
+        <figure class="carousel-item">
+            <a href="meditation.html" target="_blank"><img src="food.jpeg" alt="Image 4"></a></figure></ul>
+            <figcaption>click here to know how Healthy Food affects our mental strength</figcaption></figure></div>
+        </figure>
+        <div class="carousel-controls">
+            <button class="carousel-control" onclick="prevImage()">Prev</button>
+            <button class="carousel-control" onclick="nextImage()">Next</button>
+        </div>
+    </div>
+    <main>
+        <div class="container">
+            <div class="services">
+                <div class="service">
+                  <a href="feature_meditation.html"> <img src="pop.jpg"> Guided meditation</a>
+                </div>
+                
+                <div class="service" target="_blank" > <a href="personalitytest.html" ><img src="personality.jpg"> personality Test</a></div>
+                <div class="service">    <a href="face detection model.html"> <img src="./face.jpg">Emotions detection </a></div>
+            </div>
+            <div class="interface"><div class="service" target="_blank" > <a href="interface.html" ><img src="app.jpeg"> personality Test</a></div
+
+                <
+        </div>
+
+    <footer>
+        <p>© 2024 pychunk All rights reserved.</p>
+    </footer>
+    <script>
+        let currentImageIndex = 0;
+        const images = document.querySelectorAll('.carousel img');
+        const captions = document.querySelectorAll('.carousel figcaption');
+
+        function showImage(index) {
+            images.forEach((img, i) => {
+                img.classList.toggle('active', i === index);
+                captions[i].style.display = i === index ? 'block' : 'none';
+            });
+        }
+
+        function prevImage() {
+            currentImageIndex = (currentImageIndex > 0) ? currentImageIndex - 1 : images.length - 1;
+            showImage(currentImageIndex);
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex < images.length - 1) ? currentImageIndex + 1 : 0;
+            showImage(currentImageIndex);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            showImage(currentImageIndex);
+        });
+        
+    </script>
+</body>
+</html>

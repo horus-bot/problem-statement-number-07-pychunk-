@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personality Test</title>
+    <style>
+        body { 
+            font-family: 'Comic Sans MS', cursive, sans-serif; 
+            background-color: #ffebcd; 
+            color: #333; 
+            text-align: center; 
+        }
+        .container { 
+            max-width: 800px; 
+            margin: 0 auto; 
+            padding: 20px; 
+            background-color: #fff8dc; 
+            border-radius: 10px; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+        }
+        .question { 
+            margin-bottom: 20px; 
+            background-color: #ffefd5; 
+            padding: 15px; 
+            border-radius: 5px; 
+        }
+        .result { 
+            margin-top: 20px; 
+            font-size: 1.2em; 
+            color: #ff4500; 
+        }
+        .joke { 
+            margin-top: 10px; 
+            font-style: italic; 
+            color: #008b8b; 
+        }
+        button { 
+            background-color: #ff6347; 
+            color: white; 
+            padding: 10px 20px; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+        }
+        button:hover { 
+            background-color: #ff4500; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Personality Test</h1>
+        <div id="quiz"></div>
+        <button onclick="submitQuiz()">Submit</button>
+        <div id="result" class="result"></div>
+        <div id="joke" class="joke"></div>
+    </div>
+    <script>
+        const questions = [
+            "Do you enjoy social gatherings?",
+            "Do you prefer planning over spontaneity?",
+            "Are you detail-oriented?",
+            "Do you find it easy to start conversations?",
+            "Do you often rely on your intuition?",
+            "Do you enjoy being the center of attention?",
+            "Do you prefer working alone?",
+            "Are you a risk-taker?",
+            "Do you often think about the future?",
+            "Do you enjoy helping others?"
+        ];
+
+        const quizContainer = document.getElementById('quiz');
+        questions.forEach((question, index) => {
+            const questionDiv = document.createElement('div');
+            questionDiv.classList.add('question');
+            questionDiv.innerHTML = `
+                <p>${index + 1}. ${question}</p>
+                <input type="radio" name="q${index}" value="yes"> Yes
+                <input type="radio" name="q${index}" value="no"> No
+            `;
+            quizContainer.appendChild(questionDiv);
+        });
+
+        function submitQuiz() {
+            let score = 0;
+            questions.forEach((_, index) => {
+                const answer = document.querySelector(`input[name="q${index}"]:checked`);
+                if (answer && answer.value === 'yes') score++;
+            });
+
+            const result = document.getElementById('result');
+            result.innerHTML = `Your personality type is: ${getPersonalityType(score)}`;
+
+            fetchJoke();
+        }
+
+        function getPersonalityType(score) {
+            if (score <= 3) return 'Introvert';
+            if (score <= 6) return 'Ambivert';
+            return 'Extrovert';
+        }
+
+        function fetchJoke() {
+            fetch('https://v2.jokeapi.dev/joke/Any')
+                .then(response => response.json())
+                .then(data => {
+                    const joke = document.getElementById('joke');
+                    joke.innerHTML = data.joke || `${data.setup} - ${data.delivery}`;
+                });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meditation Guide</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e0f7fa; /* Light cyan background */
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background: linear-gradient(to right, #ff6f61, #ff9a8b); /* Vibrant pink and orange gradient */
+            color: #fff;
+            padding: 2rem 0;
+        }
+        header h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+        main {
+            padding: 20px;
+        }
+        .button {
+            padding: 15px 32px;
+            text-align: center;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Arial', sans-serif;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .start-button {
+            background-color: #42a5f5; /* Soft blue */
+            color: white;
+        }
+        .start-button:hover {
+            background-color: #1e88e5;
+        }
+        .stop-button {
+            background-color: #ff7043; /* Warm orange */
+            color: white;
+        }
+        .stop-button:hover {
+            background-color: #f4511e;
+        }
+        .message {
+            margin: 20px 0;
+            font-size: 1.2rem;
+            color: #37474f; /* Dark grey */
+            background-color: #ffffff; /* White background for text blocks */
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Guided Meditation</h1>
+    </header>
+    <main>
+        <p>Click the button below to start your guided meditation session.</p>
+        <button class="button start-button" onclick="startMeditation()">Start Meditation</button>
+        <button class="button stop-button" id="stopButton" onclick="stopMeditation()">Stop Narration</button>
+    </main>
+    <div id="messages"></div>
+    <script>
+        let speech = null;
+        let timers = [];
+        let audio = null;
+
+        function playBackgroundMusic() {
+            audio = new Audio('ancient-spirit-echoes-om-chanting-234045.mp3'); // Replace with the path to your background music file
+            audio.loop = true; // Loop the music
+            audio.volume = 0.8; // Set the volume (0.0 to 1.0)
+            audio.play();
+        }
+
+        function stopBackgroundMusic() {
+            if (audio) {
+                audio.pause();
+                audio.currentTime = 0; // Reset the audio to the beginning
+                audio = null;
+            }
+        }
+
+        function speak(text) {
+            if (speech) {
+                window.speechSynthesis.cancel(speech);
+            }
+            speech = new SpeechSynthesisUtterance(text);
+            speech.lang = 'en-US';
+            window.speechSynthesis.speak(speech);
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message';
+            const textDiv = document.createElement('div');
+            textDiv.innerHTML = `<p>${text}</p>`;
+            messageDiv.appendChild(textDiv);
+            document.getElementById('messages').appendChild(messageDiv);
+        }
+
+        function startMeditation() {
+            document.getElementById('messages').innerHTML = ''; // Clear previous messages
+            playBackgroundMusic();
+            timers.push(setTimeout(() => speak("Welcome to your guided meditation session. Let's begin by finding a comfortable seated position."), 0));
+            timers.push(setTimeout(() => speak("Close your eyes and take a deep breath in through your nose, hold for a moment, and exhale slowly through your mouth."), 5000));
+            timers.push(setTimeout(() => speak("Focus on your breath. Inhale deeply, hold, and exhale slowly. Let go of any tension in your body."), 15000));
+            timers.push(setTimeout(() => speak("Now, bring your attention to the present moment. Notice the sensations in your body and the rhythm of your breath."), 30000));
+            timers.push(setTimeout(() => speak("Allow any thoughts to come and go, without judgment. Simply observe them and bring your focus back to your breath."), 45000));
+            timers.push(setTimeout(() => speak("Continue to breathe deeply and steadily. With each inhale, imagine calmness and peace flowing into your body."), 60000));
+            timers.push(setTimeout(() => speak("With each exhale, imagine releasing any stress or tension. Feel your body becoming more relaxed with each breath."), 75000));
+            timers.push(setTimeout(() => speak("Stay in this state of relaxation for as long as you like. When you're ready, gently open your eyes and bring your awareness back to the room."), 90000));
+        }
+
+        function stopMeditation() {
+            if (speech) {
+                window.speechSynthesis.cancel(speech);
+                speech = null;
+            }
+            timers.forEach(clearTimeout);
+            timers = [];
+            stopBackgroundMusic();
+        }
+    </script>
+</body>
+</html>

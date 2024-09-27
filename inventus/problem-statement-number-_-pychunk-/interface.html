@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        
+           
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+   
+    <form action="/submit" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required><br><br>
+
+        <label for="how many glass water you drank today">how many glass water you drank today:</label>
+        <input type="how many glass water you drank today" id="how many glass water you drank today" name="how many glass water you drank today" required><br>
+       
+        
+        <label for="today weight">today weight:</label>
+        <input type="number" id="today weight" name="today weight" required><br><br>
+
+        <label for="how many calories you consumed today">how many calories you consumed today:</label>
+        <input type="number" id="how many calories you consumed today" name="how many calories you consumed today" required><br>
+        
+        <label for="how much time you ate junk food">how much time you ate junk food:</label>
+        <input type="numhow much time you ate junk food" id="how much time you ate junk food" name="how much time you ate junk food" required><br><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
